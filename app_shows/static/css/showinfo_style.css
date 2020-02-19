@@ -1,0 +1,50 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: black;
+}
+#container {
+  margin: 40px;
+  text-align: left;
+  color: white;
+  padding: 20px;
+  width: 1000px;
+}
+#show-title {
+  color: white;
+  font-size: 40pt;
+  /* font-weight: bolder; */
+  display: block;
+  margin-bottom: 20px;
+}
+.footer-links {
+  color: red !important;
+  text-decoration: none !important;
+  font-style: normal !important;
+  font-size: 10pt;
+}
+.footer {
+  margin-top: 100px;
+  margin-bottom: 0px;
+  font-style: italic;
+  color: gray;
+  font-size: 10pt;
+}
+#backshow,
+#addshow {
+  text-decoration: none !important;
+  color: white !important;
+  display: block;
+  padding: 0px 30px;
+  /* position: relative !important; */
+  font-size: 10pt;
+}
+#backbtns {
+  margin-top: 50px;
+}
+.btn {
+  margin-top: 10px;
+  display: block;
+}

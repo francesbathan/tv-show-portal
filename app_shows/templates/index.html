@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TV Show Portal</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/home_style.css' %}"
+  </head>
+  <body style="background-image: url({% static 'img/home-bg.jpg' %}">
+    <div id="container">
+      <h1 id="home-title" class="fadeInDown">Explore TV today.</h1>
+      <p id="see">CONTRIBUTE TO THE PORTAL.</p>
+      <button class="btn btn-danger">
+        <a id="explorebtn" href="/shows">SHOW ME</a>
+      </button>
+    </div>
+  </body>
+</html>

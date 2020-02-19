@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Information | TV Show Portal</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/showinfo_style.css' %}"
+  </head>
+  <body style="background-image: url({% static 'img/home-bg2.jpg' %}">
+    <div id="container">
+      <h1 id="show-title">{{ show.title }}</h1>
+      <div>
+        <p><b>ID: </b>{{ show.id }}</p>
+        <p><b>Network: </b>{{ show.network }}</p>
+        <p><b>Release Date: </b>{{ show.release_date }}</p>
+        <p><b>Description: </b></p>
+        <p>{{ show.desc }}</p>
+      </div>
+      <div class="footer">
+        <p>Last Updated: {{ show.updated_at }}</p>
+        <p>
+          <a class="footer-links" href="/shows/{{show.id}}/edit">Edit</a> |
+          <a class="footer-links" href="/shows/{{show.id}}/destroy">Delete</a>
+        </p>
+      </div>
+      <div id="backbtns">
+        <button class="btn btn-outline-danger">
+          <a href="/shows" id="backshow">BACK TO SHOWS</a>
+        </button>
+        <button class="btn btn-outline-danger">
+          <a href="/shows/new" id="addshow">ADD ANOTHER SHOW</a>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

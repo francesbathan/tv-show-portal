@@ -1,0 +1,30 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: black;
+}
+#container {
+  margin: 30vh;
+  text-align: left;
+  font-weight: bolder;
+}
+#home-title {
+  color: white;
+  font-size: 40pt;
+  display: block;
+  margin-bottom: 20px;
+}
+#see {
+  color: white;
+  font-weight: 100;
+  font-size: 13pt;
+}
+#explorebtn {
+  text-decoration: none !important;
+  color: white !important;
+  display: block;
+  padding: 5px 60px;
+  font-size: 10pt;
+}
