@@ -5,7 +5,7 @@ class ShowManager(models.Manager): #validation for show entered
         errors = {}
         if len(post_data['show_title']) < 1:
             errors['show_title'] = 'Please enter a title.'
-        all_title = Show.objects.filter(title=post_data['show_title'])
+        all_title = Show.objects.filter(title=post_data['show_title']) #validator to avoid any duplicates in the database
         if len(all_title) > 0:
             errors['duplicate_title'] = "Oh no! That show is already in the portal."
         if len(post_data['show_network']) < 1:

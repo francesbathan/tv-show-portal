@@ -31,13 +31,13 @@ def show_info(request, id): #information regarding a show (also destination for 
     }
     return render(request, 'show_info.html', context)
 
-def show_edit(request, id):
+def show_edit(request, id): #page containing form to edit particular show
     context = {
         "show": Show.objects.get(id=id)
     }
     return render(request, 'show_edit.html', context)
 
-def show_update(request, id):
+def show_update(request, id): #processes the information that went through the form and redirects to the show info page
     form = request.POST
     show=Show.objects.get(id=id)
     show.title=form['show_title']
@@ -47,7 +47,7 @@ def show_update(request, id):
     show.save()
     return redirect(f'/shows/{show.id}')
 
-def destroy(request, id):
+def destroy(request, id): #deletes the show from the database
     delete_show = Show.objects.get(id=id)
     delete_show.delete()
     return redirect('/shows')
