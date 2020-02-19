@@ -62,7 +62,7 @@ def shows_create(request): #process for form + error validation for unfilled fie
     show=Show.objects.create(title=form['show_title'], network=form['show_network'], release_date=form['show_release_date'], desc=form['show_desc'])
     return redirect(f'/shows/{show.id}')
 
-def show_info(request, id): #information regarding a show (also destination for newly added show from form)
+def show_info(request, id): #information regarding a show (also destination for newly added show from form) + review form + reviews
     if 'user_id' not in request.session:
         return redirect('/login')
     context = {
@@ -70,11 +70,11 @@ def show_info(request, id): #information regarding a show (also destination for 
     }
     return render(request, 'show_info.html', context)
 
-def process_review(request, show_id):
+def process_review(request, show_id): #processes the review passed in the review form inside show info page and posts it under the review form
     form = request.POST
-    current_user = User.objects.get(id=request.session['user_id'])
-    current_show = Show.objects.get(id=show_id)
-    Review.objects.create(title=form['title'], content=form['content'], show=current_show, created_by=current_user)
+    current_user = User.objects.get(id=request.session['user_id']) #retrieves user
+    current_show = Show.objects.get(id=show_id) #retrieves show
+    Review.objects.create(title=form['title'], content=form['content'], show=current_show, created_by=current_user) #puts the information passed through the review form into the database
     return redirect(f'/shows/{current_show.id}')
 
 def show_edit(request, id): #page containing form to edit particular show
