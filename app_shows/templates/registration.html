@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TV Show Portal</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/loginreg_style.css' %}"
+  </head>
+  <body style="background-image: url({% static 'img/home-bg.jpg' %}">
+    <div id="container">
+      <h1 id="discover" class="fadeInDown">Discover shows now.</h1>
+      <h3 id="register">Register today.</h3>
+      <div class="form-group">
+        <form action="/process_registration" method="POST">
+          {% csrf_token %}
+          <label for="">First Name: </label>
+          <input class="form-control" type="text" name="first_name" />
+          <label for="">Last Name: </label>
+          <input class="form-control" type="text" name="last_name" />
+          <label for="">Email: </label>
+          <input class="form-control" type="email" name="email" />
+          <label for="">Username: </label>
+          <input class="form-control" type="text" name="username" />
+          <label for="">Password: </label>
+          <input class="form-control" type="password" name="password" />
+          <label for="">Confirm Password: </label>
+          <input class="form-control" type="password" name="confirm_pw" />
+          {%for message in messages%}
+          <p class="errormsg">{{ message }}</p>
+          {%endfor%}
+          <button class="btn btn-danger" id="registerbtn">Register</button>
+        </form>
+      </div>
+      <p id="already">
+        Already have an account? <a href="/login" id="loginlink">Log in.</a>
+      </p>
+    </div>
+  </body>
+</html>

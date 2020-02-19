@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TV Show Portal</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/loginreg_style.css' %}"
+  </head>
+  <body style="background-image: url({% static 'img/home-bg.jpg' %}">
+    <div id="container">
+      <h1 id="discover" class="fadeInDown">Welcome back.</h1>
+      <h3 id="register">Log In</h3>
+      <div class="form-group">
+        <form action="/process_login" method="POST">
+          {% csrf_token %}
+          <label for="">Username: </label>
+          <input class="form-control" type="text" name="first_name" />
+          <label for="">Password: </label>
+          <input class="form-control" type="text" name="last_name" />
+          {%for message in messages%}
+          <p class="errormsg">{{ message }}</p>
+          {%endfor%}
+          <button class="btn btn-danger" id="registerbtn">Log In</button>
+        </form>
+      </div>
+      <p id="already">
+        Don't have an account yet?
+        <a href="/register" id="loginlink">Register now.</a>
+      </p>
+    </div>
+  </body>
+</html>

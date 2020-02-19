@@ -42,3 +42,14 @@ form {
   color: red;
   font-size: 8pt;
 }
+#logout {
+  margin-right: 60px !important;
+  right: 0 !important;
+  top: 0 !important;
+  position: absolute !important;
+}
+#logout_txt {
+  font-size: 10pt !important;
+  text-decoration: none !important;
+  color: white !important;
+}

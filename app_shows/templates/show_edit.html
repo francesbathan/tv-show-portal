@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="{% static 'css/editshow_style.css' %}"
   </head>
   <body style="background-image: url({% static 'img/home-bg2.jpg' %}">
+    <div id="logout">
+      <button class="btn btn-outline-danger">
+        <a id="logout_txt" href="/logout">Logout</a>
+      </button>
+    </div>
     <div id="container">
       <h1 id="show-title">Edit Show {{ show.id }}</h1>
       <form action="/shows/{{show.id}}/update" method="POST" class="form-group">

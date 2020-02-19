@@ -1,0 +1,58 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: black;
+}
+#container {
+  margin: 10vh auto;
+  text-align: left;
+  font-weight: bolder;
+  color: black;
+  width: 500px;
+}
+#discover {
+  /*tagline*/
+  color: white;
+  font-size: 40pt;
+  display: block;
+  margin-bottom: 20px;
+}
+#register {
+  color: white;
+}
+form {
+  /*login/register heading*/
+  color: white;
+  font-weight: 100;
+  font-size: 12pt;
+}
+label {
+  margin: 10px 0px;
+}
+input {
+  margin: 2px 0px;
+}
+button {
+  margin-top: 20px;
+}
+#registerbtn {
+  /*login/register button*/
+  text-decoration: none !important;
+  color: white !important;
+  display: block;
+  padding: 2px 60px;
+  font-size: 12pt;
+}
+#loginlink {
+  color: red !important;
+  text-decoration: none !important;
+  font-style: normal !important;
+  font-size: 12pt;
+}
+#already {
+  font-size: 12pt;
+  font-weight: 100;
+  color: white;
+}
