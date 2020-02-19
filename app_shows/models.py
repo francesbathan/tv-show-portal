@@ -1,5 +1,6 @@
 from django.db import models
 import re
+import bcrypt
 
 class ShowManager(models.Manager): #validation for show entered
     def show_validator(self, post_data):
@@ -26,8 +27,8 @@ class Show(models.Model): #show database
     updated_at = models.DateTimeField(auto_now=True)
     objects = ShowManager()
 
-class UserManager(models.Manager):
-    def register_validator(self, post_data):
+class UserManager(models.Manager): #validation for user login/registration
+    def register_validator(self, post_data): #validator for registration form
         user_errors = {}
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if len(post_data['first_name']) < 2:
@@ -46,6 +47,15 @@ class UserManager(models.Manager):
         if post_data['password'] != post_data['confirm_pw']:
             user_errors['confirm_pw'] = "Passwords do not match. Try again."
         return user_errors
+    
+    def login_validator(self, post_data): #validator for login form
+        errors = {}
+        current_user = User.objects.filter(username=post_data['username'])
+        if len(current_user) < 1:
+            errors['username'] = 'Username does not exist.'
+        elif not bcrypt.checkpw(post_data['password'].encode(), current_user[0].password.encode()):
+            errors['password'] = "Username and password do not match."
+        return errors
 
 class User(models.Model):
     first_name = models.CharField(max_length=255)
@@ -56,3 +66,11 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+class Review(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    created_by = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
+    show = models.ForeignKey(Show, related_name='reviews', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

@@ -33,11 +33,12 @@ body {
   font-size: 10pt;
 }
 #backshow,
-#addshow {
+#addshow,
+#submit_review {
   text-decoration: none !important;
   color: white !important;
   display: block;
-  padding: 0px 30px;
+  padding: 3px 30px;
   /* position: relative !important; */
   font-size: 10pt;
 }
@@ -58,4 +59,36 @@ body {
   font-size: 10pt !important;
   text-decoration: none !important;
   color: white !important;
+}
+h3 {
+  margin-top: 50px;
+}
+.form-group {
+  margin-top: 20px;
+  width: 650px;
+}
+.form-control {
+  margin: 0px 0px 20px 0px;
+}
+label {
+  margin: 7px 0px 7px 0px;
+}
+#review {
+  margin: 10px;
+  background-color: rgb(0, 0, 0, 0.5);
+  padding: 10px 15px;
+}
+#review_title {
+  font-weight: 500;
+  font-size: 13pt;
+}
+#review_content {
+  font-style: oblique;
+  margin-left: 10px;
+}
+#reviewer {
+  font-style: oblique;
+  color: gray;
+  margin-left: 10px;
+  font-size: 8pt;
 }

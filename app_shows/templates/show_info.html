@@ -43,6 +43,36 @@
           <a href="/shows/new" id="addshow">ADD ANOTHER SHOW</a>
         </button>
       </div>
+
+      <h3>Write a review</h3>
+      <form
+        class="form-group"
+        action="/process_review/{{show.id}}"
+        method="POST"
+      >
+        {% csrf_token %}
+        <label for="">Title:</label>
+        <input class="form-control" name="title" />
+        <label for="">Review:</label>
+        <textarea
+          name="content"
+          class="form-control"
+          cols="30"
+          rows="10"
+          value="Write your review here."
+        ></textarea>
+        <button class="btn btn-danger" type="submit" id="submit_review">
+          Submit Review
+        </button>
+      </form>
+      <h3>Reviews</h3>
+      {% for review in show.reviews.all reversed %}
+      <div id="review">
+        <p id="review_title">{{ review.title }}</p>
+        <p id="review_content">{{ review.content }}</p>
+        <p id="reviewer">– {{ review.created_by.username }}</p>
+      </div>
+      {% endfor %}
     </div>
   </body>
 </html>

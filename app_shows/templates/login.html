@@ -21,9 +21,9 @@
         <form action="/process_login" method="POST">
           {% csrf_token %}
           <label for="">Username: </label>
-          <input class="form-control" type="text" name="first_name" />
+          <input class="form-control" type="text" name="username" />
           <label for="">Password: </label>
-          <input class="form-control" type="text" name="last_name" />
+          <input class="form-control" type="password" name="password" />
           {%for message in messages%}
           <p class="errormsg">{{ message }}</p>
           {%endfor%}
