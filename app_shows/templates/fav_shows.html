@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorite Shows | TV Show Portal</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/favshow_style.css' %}"
+  </head>
+  <body style="background-image: url({% static 'img/home-bg2.jpg' %}">
+    <div id="logout">
+      <button class="btn btn-outline-danger">
+        <a href="/shows" id="backshow">Back to Shows</a>
+      </button>
+      <button class="btn btn-outline-danger">
+        <a href="/shows/new" id="addshow">Add Another Show</a>
+        <button class="btn btn-outline-danger">
+          <a id="logout_txt" href="/logout">Logout</a>
+        </button>
+      </button>
+    </div>
+    <div id="container">
+      <h1 id="header">Your Favorite Shows</h1>
+      <div>
+        <ul>
+          {% for show in favorite_shows %}
+          <li>
+            <a href="/shows/{{show.id}}" class="show-titles"
+              >{{ show.title }}</a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

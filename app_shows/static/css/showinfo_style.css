@@ -92,3 +92,43 @@ label {
   margin-left: 10px;
   font-size: 8pt;
 }
+#favorite_show {
+  border: 1px solid red;
+  border-radius: 5px;
+  font-size: 20pt;
+  text-align: center;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+#favorite_txt {
+  color: red;
+  text-decoration: none !important;
+}
+#favorited {
+  border: 1px solid red;
+  border-radius: 5px;
+  font-size: 20pt;
+  text-align: center;
+  background-color: red !important;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+#favorited_text {
+  color: white;
+  text-decoration: none !important;
+}
+#like {
+  margin: 40px 0px 0px 0px;
+}
+#del_rev {
+  color: red !important;
+  text-decoration: none !important;
+  font-style: normal !important;
+  font-size: 8pt;
+  background-color: transparent;
+  border: none;
+  position: relative;
+}

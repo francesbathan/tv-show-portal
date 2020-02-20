@@ -12,8 +12,12 @@ urlpatterns = [
     path('shows/new', views.shows_new), #form to add a new show
     path('shows/create', views.shows_create), #processes add show, leads to show info
     path('shows/<int:id>', views.show_info), #path for show's info
+    path('add_favorite/<int:show_id>', views.add_favorite), #processes favorite(like button)
+    path('unfavorite/<int:show_id>', views.unfavorite),
     path('process_review/<int:show_id>', views.process_review), #processes review form
+    path('delete_review/<int:show_id>/<int:review_id>', views.delete_review),
+    path('favorite_shows', views.favorite_shows),
     path('shows/<int:id>/edit', views.show_edit), #form to edit show
     path('shows/<int:id>/update', views.show_update), #processes edit show, leads to show info
-    path('shows/<int:id>/destroy', views.destroy) #deletes show
+    path('shows/<int:id>/destroy', views.destroy), #deletes show
 ]

@@ -2,30 +2,6 @@ from django.db import models
 import re
 import bcrypt
 
-class ShowManager(models.Manager): #validation for show entered
-    def show_validator(self, post_data):
-        errors = {} 
-        if len(post_data['show_title']) < 1:
-            errors['show_title'] = 'Please enter a title.'
-        all_title = Show.objects.filter(title=post_data['show_title']) #validator to avoid any duplicates in the database
-        if len(all_title) > 0: #checks if a title already exists in the database
-            errors['duplicate_title'] = "Oh no! That show is already in the portal."
-        if len(post_data['show_network']) < 1: #if the network is less than 1 character
-            errors['show_network'] = 'Please enter a network.' #error message for network 
-        if len(post_data['show_release_date']) < 1: #if user does nto enter a release date for the show
-            errors['show_release_date'] = 'Please enter a release date.' #error message for release date
-        if len(post_data['show_desc']) < 1: #if user does not enter a description
-            errors['show_desc'] = 'Please enter a description.' #error message for description
-        return errors
-
-class Show(models.Model): #show database
-    title = models.CharField(max_length = 255)
-    network = models.CharField(max_length = 255)
-    release_date = models.DateField()
-    desc = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    objects = ShowManager()
 
 class UserManager(models.Manager): #validation for user login/registration
     def register_validator(self, post_data): #validator for registration form
@@ -51,10 +27,26 @@ class UserManager(models.Manager): #validation for user login/registration
     def login_validator(self, post_data): #validator for login form
         errors = {}
         current_user = User.objects.filter(username=post_data['username']) #defines variable for user
-        if len(current_user) < 1: #checks if username is in the database
+        if len(current_user) < 1: #checks if username is in the database and matches user input
             errors['username'] = 'Username does not exist.'
         elif not bcrypt.checkpw(post_data['password'].encode(), current_user[0].password.encode()): #takes in what user puts in the password field and checks if password matches with username in the database
             errors['password'] = "Username and password do not match."
+        return errors
+
+class ShowManager(models.Manager): #validation for show entered
+    def show_validator(self, post_data):
+        errors = {} 
+        if len(post_data['show_title']) < 1:
+            errors['show_title'] = 'Please enter a title.'
+        all_title = Show.objects.filter(title=post_data['show_title']) #validator to avoid any duplicates in the database
+        if len(all_title) > 0: #checks if a title already exists in the database
+            errors['duplicate_title'] = "Oh no! That show is already in the portal."
+        if len(post_data['show_network']) < 1: #if the network is less than 1 character
+            errors['show_network'] = 'Please enter a network.' #error message for network 
+        if len(post_data['show_release_date']) < 1: #if user does nto enter a release date for the show
+            errors['show_release_date'] = 'Please enter a release date.' #error message for release date
+        if len(post_data['show_desc']) < 1: #if user does not enter a description
+            errors['show_desc'] = 'Please enter a description.' #error message for description
         return errors
 
 class User(models.Model): #class for the user
@@ -66,6 +58,17 @@ class User(models.Model): #class for the user
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+class Show(models.Model): #show database
+    title = models.CharField(max_length = 255)
+    network = models.CharField(max_length = 255)
+    release_date = models.DateField()
+    desc = models.TextField()
+    users_who_like = models.ManyToManyField(User, related_name='liked_shows')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = ShowManager()
+
 
 class Review(models.Model): #class for the review and reviews created by a specific user
     title = models.CharField(max_length=255)

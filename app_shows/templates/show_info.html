@@ -28,6 +28,26 @@
         <p><b>Description: </b></p>
         <p>{{ show.desc }}</p>
       </div>
+      <div id="like">
+        <p>Love {{ show.title }}?</p>
+        {% if show in current_user.liked_shows.all %}
+        <button id="favorited">
+          <a href="/add_favorite/{{show.id}}" id="favorited_text">♥</a>
+        </button>
+        {% else %}
+        <button id="favorite_show">
+          <a href="/add_favorite/{{show.id}}" id="favorite_txt">♥</a>
+        </button>
+        {% endif %}
+      </div>
+      <a class="footer-links" href="/favorite_shows">Go to your favorites</a>
+      <div>
+        {% if show in current_user.liked_shows.all %}
+        <a href="/unfavorite/{{show.id}}" class="footer-links"
+          >Remove from favorites</a
+        >
+      </div>
+      {% endif %}
       <div class="footer">
         <p>Last Updated: {{ show.updated_at }}</p>
         <p>
@@ -71,6 +91,12 @@
         <p id="review_title">{{ review.title }}</p>
         <p id="review_content">{{ review.content }}</p>
         <p id="reviewer">– {{ review.created_by.username }}</p>
+        {% if current_user.id == review.created_by.id %}
+        <form action="/delete_review/{{show.id}}/{{review.id}}" method="POST">
+          {% csrf_token %}
+          <button id="del_rev">Delete</button>
+        </form>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

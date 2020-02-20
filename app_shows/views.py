@@ -66,7 +66,8 @@ def show_info(request, id): #information regarding a show (also destination for 
     if 'user_id' not in request.session:
         return redirect('/login')
     context = {
-        "show": Show.objects.get(id=id)
+        "show": Show.objects.get(id=id),
+        "current_user": User.objects.get(id=request.session['user_id'])
     }
     return render(request, 'show_info.html', context)
 
@@ -76,6 +77,39 @@ def process_review(request, show_id): #processes the review passed in the review
     current_show = Show.objects.get(id=show_id) #retrieves show
     Review.objects.create(title=form['title'], content=form['content'], show=current_show, created_by=current_user) #puts the information passed through the review form into the database
     return redirect(f'/shows/{current_show.id}')
+
+def delete_review(request, show_id, review_id): #deletes the review created by the user logged in
+    if request.method != "POST":
+        return redirect(f'/shows/{show_id}')
+    review_to_delete = Review.objects.get(id=review_id)
+    review_to_delete.delete()
+    return redirect(f'/shows/{show_id}')
+
+
+def add_favorite(request, show_id): #adds a show to a user's favorites list
+    if 'user_id' not in request.session:
+        return redirect('/login')
+    current_user = User.objects.get(id=request.session['user_id'])
+    current_show = Show.objects.get(id=show_id)
+    current_user.liked_shows.add(current_show)
+    return redirect(f'/shows/{current_show.id}')
+
+def unfavorite(request, show_id): #removes a show from a user's favorites list
+    if 'user_id' not in request.session:
+        return redirect('/login')
+    current_show = Show.objects.get(id=show_id)
+    current_user = User.objects.get(id=request.session['user_id'])
+    current_show.users_who_like.remove(current_user)
+    return redirect(f'/shows/{current_show.id}')
+
+def favorite_shows(request): #renders a list of shows favorited by the user logged in
+    if 'user_id' not in request.session:
+        return redirect('/login')
+    current_user = User.objects.get(id=request.session['user_id'])
+    current_favorites = {
+        'favorite_shows': current_user.liked_shows.all()
+    }
+    return render(request, 'fav_shows.html', current_favorites)
 
 def show_edit(request, id): #page containing form to edit particular show
     if 'user_id' not in request.session:
@@ -96,10 +130,12 @@ def show_update(request, id): #processes the information that went through the f
     return redirect(f'/shows/{show.id}')
 
 def destroy(request, id): #deletes the show from the database
+    if 'user_id' not in request.session:
+        return redirect('/login')
     delete_show = Show.objects.get(id=id)
     delete_show.delete()
     return redirect('/shows')
 
-def logout(request): #logout (***FIX so user doesn't have access to content unless they log back in.)
+def logout(request): #logout functionality
     request.session.clear() 
     return redirect('/login')

@@ -1,0 +1,42 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: black;
+}
+#container {
+  margin: 40px;
+  text-align: left;
+  color: white;
+  padding: 20px;
+  width: 1000px;
+}
+#header {
+  color: white;
+  font-size: 40pt;
+  /* font-weight: bolder; */
+  display: block;
+  margin-bottom: 20px;
+}
+ul {
+  margin: 50px;
+}
+.show-titles {
+  color: red !important;
+  text-decoration: none !important;
+  font-style: normal !important;
+  font-size: 15pt;
+}
+#logout {
+  margin: 0px 20px 0px 0px;
+  right: 0 !important;
+  position: absolute !important;
+}
+#backshow,
+#addshow,
+#logout_txt {
+  font-size: 10pt !important;
+  text-decoration: none !important;
+  color: white !important;
+}
